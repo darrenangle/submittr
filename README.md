@@ -14,4 +14,3 @@ Parse back end helps to ensure the free cost, as developers are only charged for
 
 I'm paying attention to Meteor.js as a future back-end alternative, perhaps after their 1.0 release. 
 
-Test.

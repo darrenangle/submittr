@@ -13,16 +13,14 @@ $(document).ready(function(){
 						   
 	
 	
-	var 
-		//views
-		pdv = $(".pre-demo"), 
-
-		//objects
+	var pdv = $(".pre-demo"), 
 		demobutton = $("#d-btn");
 
+//initial, pre-demo view navigation
+		demobutton.click(function(){
+			pdv.fadeOut(200);
+			demo.fadeIn(200);
+		});
 
-	demobutton.click(function(){
-		pdv.fadeOut(100);
-	});
 });
 

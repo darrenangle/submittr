@@ -11,7 +11,7 @@
 
 $(document).ready(function(){ 
 						   
-	//linux github test!
+	//linux github test.
 	
 	var pdv = $(".pre-demo"), 
 		demobutton = $("#d-btn");

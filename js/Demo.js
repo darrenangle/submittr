@@ -1,4 +1,4 @@
-//TRY THE DEMO BUTTON CONVERTS THE PAGE INTO A FAKE MAGAZINE!!!!
+//TRY THE DEMO BUTTON CONVERTS THE PAGE INTO A FAKE MAGAZINE!
 
 //if user is logged in:
 // - display logout button

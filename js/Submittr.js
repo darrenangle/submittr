@@ -97,9 +97,6 @@ $(function(){
 
 			//if statement here: if current user has a submission, show submission view, else show upload view
 		}
-
-
-
 	}); 
 
 	var UploadView;

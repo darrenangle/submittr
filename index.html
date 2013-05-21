@@ -53,9 +53,17 @@
 
       <script type="text/template" id="submissions-template">
           <div class="submit">
-            <h1>You're logged in, this is the submissions view (template)</h1>
-
+            <div id="temporary-submitview">
+              <h1>You are logged in as <span id="user"><%= Parse.User.current().get("username") %></span>, this is the submissions view (template)</h1>
+              <button class="btn btn-inverse" id="logout-button">Log out</button>
+            </div>
           </div>
+      </script>
+
+      <script type="text/template" id="upload-template">
+        <h3>You currently have 0 active submissions! Upload your work below.</h3>
+        
+
 
       </script>
 

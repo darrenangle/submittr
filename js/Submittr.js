@@ -4,7 +4,7 @@ $(function(){
 
 	Parse.initialize("QbnWiSsZXhRgvcw7gLJFE9XMX9l024X5MXmhOexJ", 
 					"cmiAs3yoIeOxPl1HEOaLfNXMV7I6TaFtKe2QaVbl");
-
+	
 	//Views
 
 	//Login / Signup View
@@ -85,16 +85,30 @@ $(function(){
 
 	var SubmissionsView = Parse.View.extend({
 
+		events: {
+			"click #logout-button" : "logOut"
+		},
+		
 		el: '.content',
 
+
 		initialize: function(){
+			_.bindAll(this, "logOut");
 			this.render();
+
+		},
+
+		logOut: function(e){
+			Parse.User.logOut();
+      		new LoginView();
+      		this.undelegateEvents();
+      		delete this; 
 		},
 
 		render: function(){
 			this.$el.html(_.template($("#submissions-template").html()));
 			this.delegateEvents();
-
+			
 			//if statement here: if current user has a submission, show submission view, else show upload view
 		}
 	}); 

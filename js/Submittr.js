@@ -17,7 +17,7 @@ $(function(){
 		},
 
 		//bind view to app .content div
-		el: '.content',
+		el: ".content",
 
 		initialize: function() {
 			_.bindAll(this, "logIn", "signUp");
@@ -63,6 +63,7 @@ $(function(){
         	},
 
         		error: function(user, error) {
+        			//this needs to be fixed!! message disappears 
           		self.$(".signup-form .error").html(error.message).show();
           		this.$(".signup-form button").removeAttr("disabled");
         		}
@@ -131,5 +132,7 @@ $(function(){
 
 
 
+//render main view
+new SubmittrView();
 
 }) //end

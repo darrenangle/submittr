@@ -2,7 +2,8 @@
 <html>
   <head>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-    <script src="http://underscorejs.org/underscore.js"></script>
+    <script type='text/javascript' src="js/underscore.js"></script>
+    <script src="http://www.parsecdn.com/js/parse-1.2.7.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/submittr.css">
     <script type="text/javascript" src="js/Submittr.js"></script>
@@ -14,7 +15,7 @@
 
     <div id="submittrapp">
       
-      <div class="title">
+      <div class="page-header">
         <h1>SUBMITTR Magazine Submissions</h1>
       </div>
 
@@ -23,10 +24,31 @@
 
     </div>  
 
-     <!-- Templates (from toDo app, needs bootstrap) -->
+     <!-- templates -->
 
-  
 
+      <script type="text/template" id="login-template">
+        <div class="login">
+          <div class = "log span4 well">
+            <form class="login-form">
+            <h2>Log In</h2>
+            <div class="error" style="display:none"></div>
+            <input type="text" id="login-username" placeholder="Username" /></br>
+            <input type="password" id="login-password" placeholder="Password" /></br>
+            <button>Log In</button>
+            </form>
+          </div>
+          <div class = "span4 well">
+            <form class="signup-form">
+              <h2>Sign Up</h2>
+              <div class="error" style="display:none"></div>
+              <input type="text" id="signup-username" placeholder="Username" /></br>
+              <input type="password" id="signup-password" placeholder="Create a Password" /></br>
+              <button>Sign Up</button>
+          </form>
+          </div>
+        </div>
+      </script>
 
 
 

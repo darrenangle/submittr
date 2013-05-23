@@ -4,7 +4,23 @@ $(function(){
 
 	Parse.initialize("QbnWiSsZXhRgvcw7gLJFE9XMX9l024X5MXmhOexJ", 
 					"cmiAs3yoIeOxPl1HEOaLfNXMV7I6TaFtKe2QaVbl");
-	
+		
+	//Models
+
+	var Submission = Parse.Object.extend("Submission", {
+		//Default attributes for the submission
+		defaults: {
+			bio: "Bio goes here.",
+			cover: "Optional cover letter goes here.",
+			sub: "Paste your submission here."
+		},
+
+		initialize: function(){
+
+		}
+
+	});
+
 	//Views
 
 	//Login / Signup View
@@ -109,33 +125,75 @@ $(function(){
 		render: function(){
 			this.$el.html(_.template($("#submissions-template").html()));
 			this.delegateEvents();
-
 			//if statement here: if current user has a submission, show submission view, else show upload view
+			new UploadView;
 		}
 	});
 
 	//should uploadView and edit view be the same?
 	var UploadView = Parse.View.extend({
+		
+		el: '#uploader',
 
 		events: {
-			"click #submit-btn": "uploadToParse"
+			"click #submit-btn": "save"
 		},
 
-		el: $('.submit'),
+		
 
+		initialize: function(){
+			_.bindAll(this, "save");
+			this.render();
+		},
 
+		render: function(){
+			this.$el.html(_.template($("#upload-template").html()));
+			this.delegateEvents();
+			return this;
+		},
+
+		save: function(e){
+			e.preventDefault();
+
+			var submission = new Submission({
+				bio: 	$('#bio').val(),
+				cover: 	$('#cover').val(),
+				sub: 	$('#sub').val(),
+				status: "Recieved",
+				user: 	Parse.User.current(),
+				ACL: 	new Parse.ACL(Parse.User.current())
+			});
+
+			submission.save({
+				success: function(model){
+					$("#upload").remove();
+					new CurrentSubmissionView();
+				},
+				error: function(model, error){
+					alert("Could not upload. Error: " + error);
+				}
+			});
+		}
 	});
 
 	var CurrentSubmissionView = Parse.View.extend({
 
 		events: {
-			"click #edit-btn": "editSubmission",
-			"click #withdraw-btn": "withdrawSubmission"
+			"click #withdraw-btn": "withdraw"
 		},
 
-		el: $('.submit'),
+		el: '#uploader',
 
+		initialize: function(){
+			_.bindAll(this, "withdraw");
+			this.render();
+		},
 
+		render: function(){
+
+		}
+
+		//if status is under consideration, include in warning
 	});
 
 

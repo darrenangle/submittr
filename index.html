@@ -62,22 +62,22 @@
               <h1>You are logged in as <span id="user"><%= Parse.User.current().get("firstName") %></span>, this is the submissions view (template)</h1>
               <button class="btn btn-inverse" id="logout-button">Log out</button>
             </div>
+            <div id="uploader"></div>
           </div>
-          
+
       </script>
 
       <script type="text/template" id="upload-template">
+        <div id="upload" class="span8">
         <h3>You currently have 0 active submissions! Upload your work below.</h3>
-        
-        
-
-        <div id="bio-coverletter">
+          <form class="upload-form">
+            <h2>Create a new submission:</h2>
+            <input type="textarea" id="bio" placeholder="Your bio!"></br>
+            <input type="textarea" id="cover" placeholder="Optional cover letter"></br>
+            <input type="textarea" id="sub" placeholder="Paste your submission here."></br>
+            <button class="btn btn-large btn-success" id="submit-btn">Submit to Submittr Magazine!</button>
+          </form>   
         </div>
-
-        <div id="file-uploader">
-        </div>
-
-
       </script>
 
   </body>

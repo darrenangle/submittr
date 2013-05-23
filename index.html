@@ -30,39 +30,52 @@
 
       <script type="text/template" id="login-template">
         <div class="login">
+          
           <div class = "log span4 well">
             <form class="login-form">
             <h2>Log In</h2>
             <div class="error" style="display:none"></div>
-            <input type="text" id="login-username" placeholder="Username" /></br>
+            <input type="email" id="login-username" placeholder="Email Address" /></br>
             <input type="password" id="login-password" placeholder="Password" /></br>
             <button class="btn btn-info">Log In</button>
             </form>
           </div>
+          
           <div class = "span4 well">
           <form class="signup-form">
               <h2>Sign Up</h2>
               <div class="error" style="display:none"></div>
-              <input type="text" id="signup-username" placeholder="Username" /></br>
+              <input type="text" id="signup-firstname" placeholder="First Name" /></br>
+              <input type="text" id="signup-lastname" placeholder="Last Name" /></br>
+              <input type="email" id="signup-email" placeholder="Email Address" /></br>
               <input type="password" id="signup-password" placeholder="Create a Password" /></br>
               <button class="btn btn-success">Sign Up</button>
           </form>
           </div>
+        
         </div>
       </script>
 
       <script type="text/template" id="submissions-template">
           <div class="submit">
             <div id="temporary-submitview">
-              <h1>You are logged in as <span id="user"><%= Parse.User.current().get("username") %></span>, this is the submissions view (template)</h1>
+              <h1>You are logged in as <span id="user"><%= Parse.User.current().get("firstName") %></span>, this is the submissions view (template)</h1>
               <button class="btn btn-inverse" id="logout-button">Log out</button>
             </div>
           </div>
+          
       </script>
 
       <script type="text/template" id="upload-template">
         <h3>You currently have 0 active submissions! Upload your work below.</h3>
         
+        
+
+        <div id="bio-coverletter">
+        </div>
+
+        <div id="file-uploader">
+        </div>
 
 
       </script>

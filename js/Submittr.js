@@ -25,60 +25,61 @@ $(function(){
 		},
 
 		logIn: function(e) {
-			var self = this;
-			var username = this.$('#login-username').val();    //get username and password from form
-			var password = this.$('#login-password').val();
+			var t = this;
+			var username = t.$('#login-username').val();    //get username and password from form
+			var password = t.$('#login-password').val();
 
 			Parse.User.logIn(username, password, {
 				//login works, render ACL appropriate view
 				success: function(user) {
 					new SubmissionsView();
-					self.undelegateEvents();
-					delete self;
+					t.undelegateEvents();
+					delete t;
 				},
 
 
 				//Need to make DOM render specific error "something went wrong etc"	
 				error: function(user, error){
-					self.$(".login-form .error").html("Invalid username or password. Please try again.").show();
-          			this.$(".login-form button").removeAttr("disabled");
+					t.$(".login-form .error").html("Invalid username or password. Please try again.").show();
+					t.$(".login-form button").removeAttr("disabled");
 				}
 			});
 
-			this.$(".login-form button").attr("disabled", "disabled");
+			t.$(".login-form button").attr("disabled", "disabled");
 
 			return false;	
 		},
 
 		signUp: function(e) {
-      		var self = this;
-      		var username = this.$("#signup-username").val();
-      		var password = this.$("#signup-password").val();
-      
-      		Parse.User.signUp(username, password, { ACL: new Parse.ACL() }, {
-        		success: function(user) {
-          		new SubmissionsView();
-          		self.undelegateEvents();
-          		delete self;
-        	},
+			var t = this;
+			var firstName = t.$("#signup-firstname").val();
+			var lastName = t.$("#signup-lastname").val();
+			var username = t.$("#signup-email").val();
+			var password = t.$("#signup-password").val();
 
-        		error: function(user, error) {
-        			//this needs to be fixed!! message disappears 
-          		self.$(".signup-form .error").html(error.message).show();
-          		this.$(".signup-form button").removeAttr("disabled");
-        		}
-      	});
+			Parse.User.signUp(username, password, {ACL: new Parse.ACL(), firstName:firstName, lastName:lastName}, {
+				success: function(user) {
+				new SubmissionsView();
+				t.undelegateEvents();
+				delete t;
+			},
 
-      	this.$(".signup-form button").attr("disabled", "disabled");
+				error: function(user, error) {
+				t.$(".signup-form .error").html(error.message).show();
+				t.$(".signup-form button").removeAttr("disabled");
+				}
+      		});
 
-      	return false;
-    	
-    	},
+			//t.$(".signup-form button").attr("disabled", "disabled");
 
-    	render: function() {
-    		this.$el.html(_.template($("#login-template").html())); 
-      		this.delegateEvents();
-    	}
+		return false;
+
+		},
+
+		render: function() {
+			this.$el.html(_.template($("#login-template").html())); 
+			this.delegateEvents();
+		}
 
 	});
 
@@ -100,21 +101,42 @@ $(function(){
 
 		logOut: function(e){
 			Parse.User.logOut();
-      		new LoginView();
-      		this.undelegateEvents();
-      		delete this; 
+			new LoginView();
+			this.undelegateEvents();
+			delete this; 
 		},
 
 		render: function(){
 			this.$el.html(_.template($("#submissions-template").html()));
 			this.delegateEvents();
-			
+
 			//if statement here: if current user has a submission, show submission view, else show upload view
 		}
-	}); 
+	});
 
-	var UploadView;
-	var CurrentSubmissionView;
+	//should uploadView and edit view be the same?
+	var UploadView = Parse.View.extend({
+
+		events: {
+			"click #submit-btn": "uploadToParse"
+		},
+
+		el: $('.submit'),
+
+
+	});
+
+	var CurrentSubmissionView = Parse.View.extend({
+
+		events: {
+			"click #edit-btn": "editSubmission",
+			"click #withdraw-btn": "withdrawSubmission"
+		},
+
+		el: $('.submit'),
+
+
+	});
 
 
 	//Main view for Submittr App
@@ -130,7 +152,7 @@ $(function(){
 		//eventually, if user has admin role, render admin view
 		render: function(){
 			if(Parse.User.current()) {
-				//if user has admin role render submissions view
+				//emdedded if needed: if user has admin role render admin view else render submissions
 				new SubmissionsView();
 			} else {
 				new LoginView();
@@ -146,4 +168,4 @@ $(function(){
 //render main view
 new SubmittrView();
 
-}) //end
+})//end

@@ -154,7 +154,7 @@ $(function(){
 
 		save: function(e){
 			e.preventDefault();
-
+			if($('#sub').val()){
 			var submission = new Submission({
 				bio: 	$('#bio').val(),
 				cover: 	$('#cover').val(),
@@ -173,6 +173,9 @@ $(function(){
 					alert("Could not upload. Error: " + error);
 				}
 			});
+		} else {
+			alert("You didn't include a submission!");
+		};
 		}
 	});
 
